@@ -8,13 +8,13 @@ var environments = {};
 
 // Staging (default) environment
 environments.staging = {
-  'port' : 1100,
+  'port' : null,
   'envName' : 'staging'
 };
 
 // Production environment
 environments.production = {
-  'port' : 1100,
+  'port' : null,
   'envName' : 'production'
 };
 
