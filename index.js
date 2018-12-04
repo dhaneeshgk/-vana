@@ -85,12 +85,18 @@ handlers.sample = function(data,callback){
     callback(406,{'name':'sample handler'});
 };
 
+
 // Not found handler
 handlers.notFound = function(data,callback){
   callback(404);
 };
 
+handlers.health = function(data,callback){
+  callback(200,{"status":"ok"});
+};
+
 // Define the request router
 var router = {
-  'sample' : handlers.sample
+  'sample' : handlers.sample,
+  'health' : handlers.health
 };
