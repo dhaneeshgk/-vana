@@ -6,6 +6,7 @@
 // Dependencies
 var http = require('http');
 var url = require('url');
+var fs = require('fs')
 var StringDecoder = require('string_decoder').StringDecoder;
 var config = require('./config');
 
@@ -86,7 +87,16 @@ var handlers = {};
 
 // Sample handler
 handlers.server_name = function(data,callback){
-    callback(200,`<h1>This is EC2 ${data.host.split(":")[0]}<h1>`);
+    fs.readFile("./index.txt",(e,da)=>{
+      if(!e){
+        let decoder = new StringDecoder('utf-8')
+        let data = decoder.write(da)
+        data+=decoder.end()
+        callback(200,data);
+      }else{
+        callback(200,`<h1>This is EC2 ${data.host.split(":")[0]}<h1>`);
+      }
+    })
 };
 
 
