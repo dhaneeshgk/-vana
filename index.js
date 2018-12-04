@@ -101,6 +101,7 @@ handlers.health = function(data,callback){
 
 // Define the request router
 var router = {
-  'sample' : handlers.server_name,
+  '':handlers.server_name,
+  'server_name' : handlers.server_name,
   'health' : handlers.health
 };
