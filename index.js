@@ -103,5 +103,5 @@ handlers.health = function(data,callback){
 var router = {
   '':handlers.server_name,
   'server_name' : handlers.server_name,
-  'health' : handlers.health
+  'health.html' : handlers.health
 };
