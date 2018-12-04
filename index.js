@@ -85,7 +85,7 @@ server.listen(config.port,function(){
 var handlers = {};
 
 // Sample handler
-handlers.sample = function(data,callback){
+handlers.server_name = function(data,callback){
     callback(200,`<h1>This is EC2 ${data.host.split(":")[0]}<h1>`);
 };
 
@@ -101,6 +101,6 @@ handlers.health = function(data,callback){
 
 // Define the request router
 var router = {
-  'sample' : handlers.sample,
+  'sample' : handlers.server_name,
   'health' : handlers.health
 };
