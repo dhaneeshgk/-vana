@@ -22,6 +22,8 @@ var server = http.createServer(function(req,res){
   // Get the query string as an object
   var queryStringObject = parsedUrl.query;
 
+  var host = req.headers.host;
+
   // Get the HTTP method
   var method = req.method.toLowerCase();
 
@@ -46,7 +48,8 @@ var server = http.createServer(function(req,res){
         'queryStringObject' : queryStringObject,
         'method' : method,
         'headers' : headers,
-        'payload' : buffer
+        'payload' : buffer,
+        'host':host
       };
 
       // Route the request to the handler specified in the router
@@ -56,13 +59,14 @@ var server = http.createServer(function(req,res){
         statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
 
         // Use the payload returned from the handler, or set the default payload to an empty object
-        payload = typeof(payload) == 'object'? payload : {};
+        payload = typeof(payload) == 'object' || typeof(payload) == 'string'? payload : {};
 
         // Convert the payload to a string
-        var payloadString = JSON.stringify(payload);
+        var payloadString = typeof(payload) == 'object' ? JSON.stringify(payload) : payload;
 
+        var content_type = typeof(payload) == 'object' ? 'application/json' : 'html'
         // Return the response
-        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Content-Type',content_type);
         res.writeHead(statusCode);
         res.end(payloadString);
         console.log("Returning this response: ",statusCode,payloadString);
@@ -82,7 +86,7 @@ var handlers = {};
 
 // Sample handler
 handlers.sample = function(data,callback){
-    callback(406,{'name':'sample handler'});
+    callback(200,`<h1>This is EC2 ${data.host.split(":")[0]}<h1>`);
 };
 
 
