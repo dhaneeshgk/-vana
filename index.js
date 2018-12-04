@@ -96,7 +96,7 @@ handlers.notFound = function(data,callback){
 };
 
 handlers.health = function(data,callback){
-  callback(200,`<h3>OK<h3>`);
+  callback(200,`<h1>OK<h1>`);
 };
 
 // Define the request router
