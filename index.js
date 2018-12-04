@@ -87,7 +87,7 @@ var handlers = {};
 
 // Sample handler
 handlers.server_name = function(data,callback){
-    fs.readFile("./index.txt",(e,da)=>{
+    fs.readFile("./index.html",(e,da)=>{
       if(!e){
         let decoder = new StringDecoder('utf-8')
         let data = decoder.write(da)
